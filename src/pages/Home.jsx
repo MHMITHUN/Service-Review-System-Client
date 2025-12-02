@@ -5,14 +5,15 @@ import CountUp from 'react-countup';
 import ServiceCard from '../components/ServiceCard';
 import api from '../utils/api';
 import LoadingSpinner from '../components/Spinner';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Home = () => {
+    useDocumentTitle('Home');
     const [featuredServices, setFeaturedServices] = useState([]);
     const [stats, setStats] = useState({ users: 0, services: 0, reviews: 0 });
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        document.title = 'Home - ServiceReview';
 
         const fetchData = async () => {
             try {
@@ -36,42 +37,134 @@ const Home = () => {
 
     return (
         <div className="min-h-screen">
-            {/* Banner/Carousel Section */}
-            <section className="relative h-[600px] bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 overflow-hidden">
-                <div className="absolute inset-0 bg-black opacity-20"></div>
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-white max-w-3xl"
-                    >
-                        <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6">
-                            Discover Trusted Services
-                        </h1>
-                        <p className="text-xl md:text-2xl mb-8 opacity-90">
-                            Read authentic reviews, share your experiences, and make informed decisions
-                        </p>
-                        <div className="flex space-x-4">
-                            <Link
-                                to="/services"
-                                className="px-8 py-4 bg-white text-purple-600 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-lg hover-lift"
-                            >
-                                Explore Services
-                            </Link>
-                            <Link
-                                to="/add-service"
-                                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-all"
-                            >
-                                Add Service
-                            </Link>
-                        </div>
-                    </motion.div>
+            {/* Hero Banner Section */}
+            <section className="relative min-h-[650px] lg:min-h-[700px] bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
+                {/* Animated Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+                    <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+                    <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
                 </div>
 
-                {/* Animated Background Shapes */}
-                <div className="absolute top-10 right-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-10 left-10 w-96 h-96 bg-yellow-300 opacity-10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+                {/* Content Container */}
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        {/* Left Content */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="text-white z-10"
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2, duration: 0.6 }}
+                                className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6 border border-white/30"
+                            >
+                                <span className="text-sm font-semibold">🇧🇩 বাংলাদেশের সেরা সার্ভিস প্ল্যাটফর্ম</span>
+                            </motion.div>
+
+                            <motion.h1
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3, duration: 0.6 }}
+                                className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight"
+                            >
+                                Find & Review
+                                <span className="block text-yellow-200">
+                                    Trusted Services
+                                </span>
+                            </motion.h1>
+
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: 0.6 }}
+                                className="text-lg lg:text-xl mb-8 text-white/90 leading-relaxed max-w-xl"
+                            >
+                                Discover authentic reviews from real users. Share your experiences and help others make informed decisions.
+                            </motion.p>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.7, duration: 0.6 }}
+                                className="flex flex-wrap gap-4"
+                            >
+                                <Link
+                                    to="/services"
+                                    className="inline-flex items-center px-8 py-4 bg-white text-purple-600 rounded-xl font-bold hover:bg-opacity-95 transition-all shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 text-base lg:text-lg"
+                                >
+                                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                    Explore Services
+                                </Link>
+                                <Link
+                                    to="/add-service"
+                                    className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl font-bold hover:bg-white hover:text-purple-600 transition-all backdrop-blur-sm text-base lg:text-lg transform hover:-translate-y-1"
+                                >
+                                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Add Service
+                                </Link>
+                            </motion.div>
+
+                            {/* Stats Preview */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.9, duration: 0.6 }}
+                                className="mt-12 flex gap-8"
+                            >
+                                <div>
+                                    <div className="text-3xl font-bold text-yellow-200">{stats.services}+</div>
+                                    <div className="text-sm text-white/80">Services</div>
+                                </div>
+                                <div>
+                                    <div className="text-3xl font-bold text-yellow-200">{stats.reviews}+</div>
+                                    <div className="text-sm text-white/80">Reviews</div>
+                                </div>
+                                <div>
+                                    <div className="text-3xl font-bold text-yellow-200">{stats.users}+</div>
+                                    <div className="text-sm text-white/80">Users</div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+
+                        {/* Right Image */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="relative hidden lg:block"
+                        >
+                            <div className="relative">
+                                <img
+                                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop&q=80"
+                                    alt="Team collaboration"
+                                    className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                                />
+                                {/* Floating Card */}
+                                <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-2xl">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
+                                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div className="text-sm font-semibold text-gray-900">Verified Reviews</div>
+                                            <div className="text-xs text-gray-500">Trusted by thousands</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
             </section>
 
             {/* Stats Section */}
@@ -180,10 +273,10 @@ const Home = () => {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {[
-                            { name: 'TechCorp', description: 'Leading tech solutions provider' },
-                            { name: 'CloudBase', description: 'Cloud infrastructure experts' },
-                            { name: 'DataFlow', description: 'Data analytics platform' },
-                            { name: 'SecureNet', description: 'Cybersecurity specialists' }
+                            { name: 'BdTech', description: 'Leading IT solutions' },
+                            { name: 'DataCare', description: 'Cloud experts' },
+                            { name: 'AdBuzz', description: 'Digital marketing' },
+                            { name: 'SecureNet', description: 'Cybersecurity' }
                         ].map((partner, index) => (
                             <motion.div
                                 key={index}
@@ -226,22 +319,22 @@ const Home = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {[
                             {
-                                name: 'Sarah Johnson',
-                                role: 'Business Owner',
-                                comment: 'This platform helped me find the perfect web development service. The reviews were honest and detailed!',
-                                avatar: 'https://i.pravatar.cc/150?img=1'
+                                name: 'আব্দুল্লাহ আল মামুন',
+                                role: 'ব্যবসায়ী, ঢাকা',
+                                comment: 'এই প্ল্যাটফর্মে আমি আমার ব্যবসার জন্য পারফেক্ট ওয়েব ডেভেলপমেন্ট সার্ভিস পেয়েছি। রিভিউগুলো সত্যিই সৎ এবং বিস্তারিত!',
+                                avatar: 'https://i.pravatar.cc/150?img=12'
                             },
                             {
-                                name: 'Michael Chen',
-                                role: 'Freelancer',
-                                comment: 'I love how easy it is to share my experiences. This platform has become my go-to for service recommendations.',
-                                avatar: 'https://i.pravatar.cc/150?img=2'
+                                name: 'তাসনিম আরা',
+                                role: 'ফ্রিল্যান্সার, চট্টগ্রাম',
+                                comment: 'সার্ভিস সম্পর্কে নিজের অভিজ্ঞতা শেয়ার করা খুবই সহজ। এখন এটা আমার প্রিয় প্ল্যাটফর্ম সার্ভিস খোঁজার জন্য।',
+                                avatar: 'https://i.pravatar.cc/150?img=45'
                             },
                             {
-                                name: 'Emily Davis',
-                                role: 'Startup Founder',
-                                comment: 'The quality of services listed here is outstanding. Saved me countless hours of research!',
-                                avatar: 'https://i.pravatar.cc/150?img=3'
+                                name: 'মোঃ কামরুল হাসান',
+                                role: 'স্টার্টআপ ফাউন্ডার',
+                                comment: 'এখানে তালিকাভুক্ত সার্ভিসের মান অসাধারণ। অনেক সময় এবং গবেষণা বাঁচিয়ে দিয়েছে!',
+                                avatar: 'https://i.pravatar.cc/150?img=33'
                             }
                         ].map((testimonial, index) => (
                             <motion.div

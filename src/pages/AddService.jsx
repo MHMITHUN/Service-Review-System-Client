@@ -1,5 +1,13 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useAuth } from '../contexts/AuthContext';
+import api from '../utils/api';
+import toast from 'react-hot-toast';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const AddService = () => {
+    useDocumentTitle('Add Service');
     const { user } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -14,10 +22,6 @@ const AddService = () => {
     });
 
     const categories = ['IT', 'Food', 'Transport', 'Healthcare', 'Education', 'Finance'];
-
-    useEffect(() => {
-        document.title = 'Add Service - ServiceReview';
-    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -129,7 +133,7 @@ const AddService = () => {
 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Price (USD) *
+                                    Price (৳ Taka) *
                                 </label>
                                 <input
                                     type="number"
@@ -140,7 +144,7 @@ const AddService = () => {
                                     value={formData.price}
                                     onChange={handleChange}
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                    placeholder="99.99"
+                                    placeholder="5000"
                                 />
                             </div>
 

@@ -16,6 +16,7 @@ import MyReviews from './pages/MyReviews';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
 function App() {
     return (
@@ -56,6 +57,14 @@ function App() {
                                     </PrivateRoute>
                                 }
                             />
+                            <Route
+                                path="/profile"
+                                element={
+                                    <PrivateRoute>
+                                        <Profile />
+                                    </PrivateRoute>
+                                }
+                            />
 
                             {/* 404 Route */}
                             <Route path="*" element={<NotFound />} />
@@ -66,22 +75,29 @@ function App() {
 
                 {/* Toast Notifications */}
                 <Toaster
-                    position="top-right"
+                    position="top-center"
+                    reverseOrder={false}
+                    gutter={8}
                     toastOptions={{
                         duration: 3000,
                         style: {
                             background: '#fff',
-                            color: '#363636',
-                            borderRadius: '10px',
-                            boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+                            color: '#1f2937',
+                            borderRadius: '12px',
+                            boxShadow: '0 10px 40px -10px rgba(0, 0, 0, 0.2)',
+                            padding: '12px 20px',
+                            fontSize: '14px',
+                            fontWeight: '500',
                         },
                         success: {
+                            duration: 2500,
                             iconTheme: {
                                 primary: '#10B981',
                                 secondary: '#fff',
                             },
                         },
                         error: {
+                            duration: 3500,
                             iconTheme: {
                                 primary: '#EF4444',
                                 secondary: '#fff',

@@ -10,7 +10,10 @@ import LoadingSpinner from '../components/Spinner';
 import { formatDateTime } from '../utils/formatDate';
 import toast from 'react-hot-toast';
 
+import useDocumentTitle from '../hooks/useDocumentTitle';
+
 const MyReviews = () => {
+    useDocumentTitle('My Reviews');
     const { user } = useAuth();
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,7 +22,6 @@ const MyReviews = () => {
     const [updateLoading, setUpdateLoading] = useState(false);
 
     useEffect(() => {
-        document.title = 'My Reviews - ServiceReview';
         if (user) {
             fetchMyReviews();
         }

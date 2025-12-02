@@ -11,6 +11,8 @@ import LoadingSpinner from '../components/Spinner';
 import { formatDate } from '../utils/formatDate';
 import toast from 'react-hot-toast';
 
+import useDocumentTitle from '../hooks/useDocumentTitle';
+
 const ServiceDetails = () => {
     const { id } = useParams();
     const { user } = useAuth();
@@ -23,15 +25,11 @@ const ServiceDetails = () => {
     });
     const [submittingReview, setSubmittingReview] = useState(false);
 
+    useDocumentTitle(service ? service.title : 'Service Details');
+
     useEffect(() => {
         fetchServiceData();
     }, [id]);
-
-    useEffect(() => {
-        if (service) {
-            document.title = `${service.title} - ServiceReview`;
-        }
-    }, [service]);
 
     const fetchServiceData = async () => {
         setLoading(true);

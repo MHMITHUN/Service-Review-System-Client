@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import ServiceCard from '../components/ServiceCard';
 import api from '../utils/api';
 import LoadingSpinner from '../components/Spinner';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const AllServices = () => {
+    useDocumentTitle('All Services');
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
@@ -13,9 +15,19 @@ const AllServices = () => {
     const categories = ['all', 'IT', 'Food', 'Transport', 'Healthcare', 'Education', 'Finance'];
 
     useEffect(() => {
-        document.title = 'All Services - ServiceReview';
         fetchServices();
     }, []);
+
+    // Real-time search with debouncing
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (searchQuery !== undefined) {
+                fetchServices(searchQuery, selectedCategory);
+            }
+        }, 500); // 500ms debounce
+
+        return () => clearTimeout(timeoutId);
+    }, [searchQuery]);
 
     const fetchServices = async (search = '', category = 'all') => {
         setLoading(true);
@@ -70,7 +82,7 @@ const AllServices = () => {
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Search by title, category, or company..."
+                            placeholder="Search by title, category, or company... (instant search)"
                             className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                         />
                         <button
@@ -82,14 +94,14 @@ const AllServices = () => {
                     </form>
 
                     {/* Category Filter */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-3">
                         {categories.map((category) => (
                             <button
                                 key={category}
                                 onClick={() => handleCategoryChange(category)}
-                                className={`px-6 py-2 rounded-full font-medium transition-all ${selectedCategory === category
-                                        ? 'bg-gradient-primary text-white shadow-lg'
-                                        : 'bg-white text-gray-700 hover:bg-gray-100'
+                                className={`px-6 py-2.5 rounded-full font-semibold transition-all transform hover:scale-105 border-2 ${selectedCategory === category
+                                    ? 'bg-gradient-primary text-white border-transparent shadow-lg'
+                                    : 'bg-white text-gray-700 border-gray-200 hover:border-purple-300 hover:bg-purple-50'
                                     }`}
                             >
                                 {category.charAt(0).toUpperCase() + category.slice(1)}

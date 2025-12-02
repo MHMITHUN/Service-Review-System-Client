@@ -87,9 +87,8 @@ export const AuthProvider = ({ children }) => {
             await signOut(auth);
             // Clear JWT cookie
             await api.post('/api/auth/logout');
-            toast.success('Logged out successfully!');
         } catch (error) {
-            toast.error(error.message);
+            toast.error('Logout failed');
             throw error;
         }
     };

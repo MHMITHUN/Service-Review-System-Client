@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import useDocumentTitle from '../hooks/useDocumentTitle';
+
 const NotFound = () => {
+    useDocumentTitle('404 Not Found');
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50">
             <div className="text-center">

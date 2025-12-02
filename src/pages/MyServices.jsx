@@ -6,7 +6,10 @@ import api from '../utils/api';
 import LoadingSpinner from '../components/Spinner';
 import toast from 'react-hot-toast';
 
+import useDocumentTitle from '../hooks/useDocumentTitle';
+
 const MyServices = () => {
+    useDocumentTitle('My Services');
     const { user } = useAuth();
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,7 +18,6 @@ const MyServices = () => {
     const [updateLoading, setUpdateLoading] = useState(false);
 
     useEffect(() => {
-        document.title = 'My Services - ServiceReview';
         if (user) {
             fetchMyServices();
         }
