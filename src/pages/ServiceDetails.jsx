@@ -169,7 +169,7 @@ const ServiceDetails = () => {
                                 )}
                                 <div className="flex items-center text-gray-600">
                                     <span className="font-semibold w-24">Price:</span>
-                                    <span className="text-2xl font-bold text-gradient">${service.price}</span>
+                                    <span className="text-2xl font-bold text-gradient">৳ {service.price}</span>
                                 </div>
                                 <div className="flex items-center text-gray-600">
                                     <span className="font-semibold w-24">Added:</span>

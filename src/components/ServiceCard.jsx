@@ -17,7 +17,7 @@ const ServiceCard = ({ service }) => {
             onClick={handleCardClick}
             className="bg-white rounded-xl shadow-lg overflow-hidden hover-lift h-full cursor-pointer group"
         >
-            <div 
+            <div
                 onClick={handleCardClick}
                 className="relative h-48 overflow-hidden shrink-0"
             >
@@ -27,11 +27,11 @@ const ServiceCard = ({ service }) => {
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-md">
-                    <span className="text-purple-600 font-semibold">${service.price}</span>
+                    <span className="text-purple-600 font-semibold">৳ {service.price}</span>
                 </div>
             </div>
 
-            <div 
+            <div
                 onClick={handleCardClick}
                 className="p-6 flex flex-col flex-grow"
             >
