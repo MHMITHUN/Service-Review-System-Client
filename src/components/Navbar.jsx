@@ -67,7 +67,7 @@ const Navbar = () => {
                                 to={item.to}
                                 className={({ isActive }) =>
                                     `px-4 py-2 rounded-lg font-medium transition-all ${isActive
-                                        ? 'bg-gradient-primary text-white'
+                                        ? 'bg-purple-100 text-purple-700'
                                         : 'text-gray-700 hover:bg-purple-50 hover:text-purple-600'
                                     }`
                                 }
@@ -159,7 +159,7 @@ const Navbar = () => {
                                 onClick={() => setIsMenuOpen(false)}
                                 className={({ isActive }) =>
                                     `block px-4 py-3 rounded-lg font-medium transition-all mb-1 ${isActive
-                                        ? 'bg-gradient-primary text-white'
+                                        ? 'bg-purple-100 text-purple-700'
                                         : 'text-gray-700 hover:bg-purple-50 hover:text-purple-600'
                                     }`
                                 }

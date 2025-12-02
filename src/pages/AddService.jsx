@@ -123,7 +123,7 @@ const AddService = () => {
                                     required
                                     value={formData.category}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
                                 >
                                     {categories.map((cat) => (
                                         <option key={cat} value={cat}>{cat}</option>

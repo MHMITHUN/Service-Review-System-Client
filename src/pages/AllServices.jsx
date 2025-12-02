@@ -55,7 +55,7 @@ const AllServices = () => {
         fetchServices(searchQuery, category);
     };
 
-    if (loading) return <LoadingSpinner />;
+
 
     return (
         <div className="min-h-screen bg-gray-50 py-12">
@@ -100,7 +100,7 @@ const AllServices = () => {
                                 key={category}
                                 onClick={() => handleCategoryChange(category)}
                                 className={`px-6 py-2.5 rounded-full font-semibold transition-all transform hover:scale-105 border-2 ${selectedCategory === category
-                                    ? 'bg-gradient-primary text-white border-transparent shadow-lg'
+                                    ? 'gradient-primary text-white border-transparent shadow-lg'
                                     : 'bg-white text-gray-700 border-gray-200 hover:border-purple-300 hover:bg-purple-50'
                                     }`}
                             >
@@ -111,7 +111,11 @@ const AllServices = () => {
                 </div>
 
                 {/* Services Grid */}
-                {services.length > 0 ? (
+                {loading ? (
+                    <div className="py-20">
+                        <LoadingSpinner />
+                    </div>
+                ) : services.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((service, index) => (
                             <motion.div

@@ -203,7 +203,7 @@ const MyServices = () => {
                                         <select
                                             value={editingService.category}
                                             onChange={(e) => setEditingService({ ...editingService, category: e.target.value })}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white text-gray-900"
                                         >
                                             <option value="IT">IT</option>
                                             <option value="Food">Food</option>
