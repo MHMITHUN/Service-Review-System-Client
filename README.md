@@ -5,6 +5,17 @@ A modern, full-featured service review platform built with React, Tailwind CSS, 
 ## 🌐 Live URL
 [Live Demo](https://your-netlify-url.netlify.app)
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](https://i.postimg.cc/m2vT9zMm/screencapture-localhost-5173-2025-12-02-17-26-23.png)
+
+### All Services Page
+![All Services](https://i.postimg.cc/k4YmgBqR/screencapture-localhost-5173-services-2025-12-02-17-27-41.png)
+
+### Add Service Page
+![Add Service](https://i.postimg.cc/wxPzKywX/screencapture-localhost-5173-add-service-2025-12-02-17-28-25.png)
+
 ## 📋 Project Purpose
 ServiceReview is a comprehensive platform that allows users to discover, review, and share experiences about various services. Users can add services, post reviews with ratings, and manage their contributions through an intuitive interface.
 
@@ -24,6 +35,7 @@ ServiceReview is a comprehensive platform that allows users to discover, review,
 
 ### Review System
 - **Add Reviews** with star ratings (using react-rating)
+- **Review Confirmation Modal** to prevent accidental submissions
 - **Update/Delete Own Reviews** with confirmation modals
 - **View All Reviews** for any service
 - **My Reviews Page** to manage personal reviews
