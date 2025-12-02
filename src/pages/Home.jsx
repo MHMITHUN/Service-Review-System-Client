@@ -62,7 +62,7 @@ const Home = () => {
                                 transition={{ delay: 0.2, duration: 0.6 }}
                                 className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6 border border-white/30"
                             >
-                                <span className="text-sm font-semibold">🇧🇩 বাংলাদেশের সেরা সার্ভিস প্ল্যাটফর্ম</span>
+                                <span className="text-sm font-semibold">Find & Review Trusted Services</span>
                             </motion.div>
 
                             <motion.h1
@@ -71,9 +71,9 @@ const Home = () => {
                                 transition={{ delay: 0.3, duration: 0.6 }}
                                 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight"
                             >
-                                Find & Review
+                                Discover & Share
                                 <span className="block text-yellow-200">
-                                    Trusted Services
+                                    Service Reviews
                                 </span>
                             </motion.h1>
 
@@ -254,48 +254,102 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Meet Our Partners Section */}
-            <section className="py-16 bg-white">
+            {/* Partners Section */}
+            <section className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-center mb-12"
+                        className="text-center mb-16"
                     >
                         <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
                             Meet Our Partners
                         </h2>
-                        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                        <p className="text-xl text-gray-600">
                             Trusted companies that power our platform
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                         {[
-                            { name: 'BdTech', description: 'Leading IT solutions' },
-                            { name: 'DataCare', description: 'Cloud experts' },
-                            { name: 'AdBuzz', description: 'Digital marketing' },
-                            { name: 'SecureNet', description: 'Cybersecurity' }
+                            {
+                                name: 'Grameenphone',
+                                tagline: 'Leading Telecom Provider',
+                                logo: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Grameenphone_Logo_GP_Logo.svg',
+                                bgColor: 'bg-white'
+                            },
+                            {
+                                name: 'bKash',
+                                tagline: 'Digital Payment Solution',
+                                logo: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSwiHGZdHchwDekVI-tkwVuh5mVMwJe86-phafEtJUWvtKwi3UN8blUyqSN1fiLPUBZ_irOqdO1',
+                                bgColor: 'bg-pink-50'
+                            },
+                            {
+                                name: 'Daraz',
+                                tagline: 'E-commerce Platform',
+                                logo: 'https://images.seeklogo.com/logo-png/42/1/daraz-logo-png_seeklogo-429389.png',
+                                bgColor: 'bg-orange-50'
+                            },
+                            {
+                                name: 'Pathao',
+                                tagline: 'Logistics & Delivery',
+                                logo: 'https://images.seeklogo.com/logo-png/50/1/pathao-logo-png_seeklogo-504561.png',
+                                bgColor: 'bg-red-50'
+                            }
                         ].map((partner, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="text-center p-6 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 hover-lift"
+                                className="group"
                             >
-                                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-primary rounded-full flex items-center justify-center">
-                                    <span className="text-white font-bold text-2xl">
-                                        {partner.name.charAt(0)}
-                                    </span>
+                                <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-purple-500 hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-600">
+                                    {/* Logo Container */}
+                                    <div className={`h-24 flex items-center justify-center mb-4 rounded-xl ${partner.bgColor} p-4 group-hover:bg-white/10 transition-all`}>
+                                        <img
+                                            src={partner.logo}
+                                            alt={partner.name}
+                                            className="max-w-full max-h-full object-contain"
+                                        />
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="text-center">
+                                        <h3 className="text-lg font-bold text-gray-900 group-hover:text-white mb-1 transition-all">
+                                            {partner.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-600 group-hover:text-white/90 transition-all">{partner.tagline}</p>
+                                    </div>
                                 </div>
-                                <h3 className="font-heading font-bold text-gray-900 mb-2">{partner.name}</h3>
-                                <p className="text-sm text-gray-600">{partner.description}</p>
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* Partner Stats */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 md:p-12"
+                    >
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-white">
+                            <div>
+                                <div className="text-4xl md:text-5xl font-bold mb-2">100+</div>
+                                <div className="text-lg text-white/90">Partner Companies</div>
+                            </div>
+                            <div>
+                                <div className="text-4xl md:text-5xl font-bold mb-2">50K+</div>
+                                <div className="text-lg text-white/90">Services Provided</div>
+                            </div>
+                            <div>
+                                <div className="text-4xl md:text-5xl font-bold mb-2">98%</div>
+                                <div className="text-lg text-white/90">Satisfaction Rate</div>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -364,25 +418,83 @@ const Home = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 bg-gradient-primary text-white">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <section className="relative py-24 bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-10 right-10 w-96 h-96 bg-yellow-300 rounded-full blur-3xl"></div>
+                </div>
+
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+                        {/* Badge */}
+                        <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6 border border-white/30">
+                            <span className="text-sm font-semibold text-white">✨ Join Our Community</span>
+                        </div>
+
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight">
                             Ready to Get Started?
                         </h2>
-                        <p className="text-xl mb-8 opacity-90">
-                            Join thousands of users sharing and discovering great services
+                        <p className="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+                            Join thousands of users sharing and discovering great services. Create your free account today!
                         </p>
-                        <Link
-                            to="/register"
-                            className="inline-block px-8 py-4 bg-white text-purple-600 rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-lg hover-lift"
-                        >
-                            Create Free Account
-                        </Link>
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                            <Link
+                                to="/register"
+                                className="inline-flex items-center px-10 py-4 bg-white text-purple-600 rounded-xl font-bold hover:bg-opacity-95 transition-all shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 text-lg"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
+                                Create Free Account
+                            </Link>
+                            <Link
+                                to="/services"
+                                className="inline-flex items-center px-10 py-4 bg-transparent border-2 border-white text-white rounded-xl font-bold hover:bg-white hover:text-purple-600 transition-all text-lg transform hover:-translate-y-1"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                Browse Services
+                            </Link>
+                        </div>
+
+                        {/* Features Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-white font-bold text-lg mb-2">100% Free</h3>
+                                <p className="text-white/80 text-sm">No hidden costs, completely free forever</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-white font-bold text-lg mb-2">Verified Reviews</h3>
+                                <p className="text-white/80 text-sm">Authentic feedback from real users</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-white font-bold text-lg mb-2">Instant Access</h3>
+                                <p className="text-white/80 text-sm">Start browsing and reviewing immediately</p>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             </section>

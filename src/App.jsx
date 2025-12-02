@@ -5,6 +5,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
+import ScrollToTop from './components/ScrollToTop';
 
 // Pages
 import Home from './pages/Home';
@@ -21,6 +22,7 @@ import Profile from './pages/Profile';
 function App() {
     return (
         <Router>
+            <ScrollToTop />
             <AuthProvider>
                 <div className="flex flex-col min-h-screen">
                     <Navbar />

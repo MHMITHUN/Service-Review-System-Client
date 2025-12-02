@@ -42,8 +42,8 @@ const Footer = () => {
                     <div>
                         <h3 className="text-white font-semibold text-lg mb-4">Contact</h3>
                         <ul className="space-y-2">
-                            <li className="text-gray-400">Email: support@servicereview.com</li>
-                            <li className="text-gray-400">Phone: +1 (555) 123-4567</li>
+                            <li className="text-gray-400">Email: mhmmithun1@gmail.com</li>
+                            <li className="text-gray-400">Phone: +8801560027539</li>
                             <li className="flex space-x-4 mt-4">
                                 <a href="#" className="hover:text-purple-400 transition-colors">
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
