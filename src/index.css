@@ -25,7 +25,9 @@ h6 {
 
 /* Custom Utility Classes */
 @layer utilities {
-  .gradient-primary {
+
+  .gradient-primary,
+  .bg-gradient-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 

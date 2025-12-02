@@ -23,7 +23,7 @@ const ServiceDetails = () => {
         rating: 0,
         reviewText: ''
     });
-    const [submittingReview, setSubmittingReview] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     useDocumentTitle(service ? service.title : 'Service Details');
 
@@ -48,7 +48,26 @@ const ServiceDetails = () => {
         }
     };
 
-    const handleSubmitReview = async (e) => {
+    const handleBookService = () => {
+        toast.success('Booking Request Sent! The service provider will contact you soon.', {
+            duration: 5000,
+            icon: '📅'
+        });
+
+        // Scroll to review section after a short delay to encourage review
+        setTimeout(() => {
+            const reviewSection = document.getElementById('add-review');
+            if (reviewSection) {
+                reviewSection.scrollIntoView({ behavior: 'smooth' });
+                toast('Don\'t forget to leave a review after your service!', {
+                    icon: '⭐',
+                    duration: 4000
+                });
+            }
+        }, 2000);
+    };
+
+    const handleInitiateReview = (e) => {
         e.preventDefault();
 
         if (!user) {
@@ -66,6 +85,10 @@ const ServiceDetails = () => {
             return;
         }
 
+        setShowModal(true);
+    };
+
+    const handleConfirmReview = async () => {
         setSubmittingReview(true);
         try {
             const newReview = {
@@ -82,6 +105,7 @@ const ServiceDetails = () => {
             const response = await api.post('/api/reviews', newReview);
             setReviews([response.data.review, ...reviews]);
             setReviewData({ rating: 0, reviewText: '' });
+            setShowModal(false);
             toast.success('Review added successfully!');
         } catch (error) {
             console.error('Error submitting review:', error);
@@ -95,7 +119,7 @@ const ServiceDetails = () => {
     if (!service) return <div>Service not found</div>;
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12">
+        <div className="min-h-screen bg-gray-50 py-12 relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Service Details */}
                 <motion.div
@@ -154,12 +178,20 @@ const ServiceDetails = () => {
                             </div>
 
                             {user && (
-                                <Link
-                                    to={`/services/${id}#add-review`}
-                                    className="inline-block px-8 py-3 bg-gradient-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
-                                >
-                                    Write a Review
-                                </Link>
+                                <div className="flex flex-wrap gap-4">
+                                    <button
+                                        onClick={handleBookService}
+                                        className="px-8 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                    >
+                                        Book Now
+                                    </button>
+                                    <a
+                                        href="#add-review"
+                                        className="px-8 py-3 bg-white border-2 border-purple-600 text-purple-600 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
+                                    >
+                                        Write a Review
+                                    </a>
+                                </div>
                             )}
                         </div>
                     </div>
@@ -175,7 +207,7 @@ const ServiceDetails = () => {
                             </h2>
 
                             {user ? (
-                                <form onSubmit={handleSubmitReview} className="space-y-4">
+                                <form onSubmit={handleInitiateReview} className="space-y-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">
                                             Your Rating
@@ -203,10 +235,9 @@ const ServiceDetails = () => {
 
                                     <button
                                         type="submit"
-                                        disabled={submittingReview}
-                                        className="w-full py-3 bg-gradient-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+                                        className="w-full py-3 bg-gradient-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
                                     >
-                                        {submittingReview ? 'Submitting...' : 'Submit Review'}
+                                        Submit Review
                                     </button>
                                 </form>
                             ) : (
@@ -253,6 +284,50 @@ const ServiceDetails = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Confirmation Modal */}
+            {showModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full"
+                    >
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">Confirm Review</h3>
+                        <p className="text-gray-600 mb-6">
+                            Are you sure you want to submit this review?
+                        </p>
+
+                        <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                            <div className="flex items-center gap-1 mb-2">
+                                {[...Array(5)].map((_, i) => (
+                                    <StarIconSolid
+                                        key={i}
+                                        className={`w-5 h-5 ${i < reviewData.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                    />
+                                ))}
+                            </div>
+                            <p className="text-gray-700 italic">"{reviewData.reviewText}"</p>
+                        </div>
+
+                        <div className="flex gap-4">
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleConfirmReview}
+                                disabled={submittingReview}
+                                className="flex-1 px-4 py-2 bg-gradient-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+                            >
+                                {submittingReview ? 'Submitting...' : 'Confirm'}
+                            </button>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
         </div>
     );
 };

@@ -17,12 +17,13 @@ const Home = () => {
 
         const fetchData = async () => {
             try {
-                const [servicesRes, statsRes] = await Promise.all([
+                const [servicesRes, statsRes, reviewsRes] = await Promise.all([
                     api.get('/api/services/featured'),
-                    api.get('/api/stats')
+                    api.get('/api/stats'),
+                    api.get('/api/reviews/recent')
                 ]);
                 setFeaturedServices(servicesRes.data);
-                setStats(statsRes.data);
+                setStats({ ...statsRes.data, recentReviews: reviewsRes.data });
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -371,48 +372,51 @@ const Home = () => {
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                name: 'আব্দুল্লাহ আল মামুন',
-                                role: 'ব্যবসায়ী, ঢাকা',
-                                comment: 'এই প্ল্যাটফর্মে আমি আমার ব্যবসার জন্য পারফেক্ট ওয়েব ডেভেলপমেন্ট সার্ভিস পেয়েছি। রিভিউগুলো সত্যিই সৎ এবং বিস্তারিত!',
-                                avatar: 'https://i.pravatar.cc/150?img=12'
-                            },
-                            {
-                                name: 'তাসনিম আরা',
-                                role: 'ফ্রিল্যান্সার, চট্টগ্রাম',
-                                comment: 'সার্ভিস সম্পর্কে নিজের অভিজ্ঞতা শেয়ার করা খুবই সহজ। এখন এটা আমার প্রিয় প্ল্যাটফর্ম সার্ভিস খোঁজার জন্য।',
-                                avatar: 'https://i.pravatar.cc/150?img=45'
-                            },
-                            {
-                                name: 'মোঃ কামরুল হাসান',
-                                role: 'স্টার্টআপ ফাউন্ডার',
-                                comment: 'এখানে তালিকাভুক্ত সার্ভিসের মান অসাধারণ। অনেক সময় এবং গবেষণা বাঁচিয়ে দিয়েছে!',
-                                avatar: 'https://i.pravatar.cc/150?img=33'
-                            }
-                        ].map((testimonial, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="bg-white p-6 rounded-xl shadow-lg hover-lift"
-                            >
-                                <div className="flex items-center mb-4">
-                                    <img
-                                        src={testimonial.avatar}
-                                        alt={testimonial.name}
-                                        className="w-12 h-12 rounded-full mr-3"
-                                    />
-                                    <div>
-                                        <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                                        <p className="text-sm text-gray-600">{testimonial.role}</p>
+                        {stats.recentReviews && stats.recentReviews.length > 0 ? (
+                            stats.recentReviews.map((review, index) => (
+                                <motion.div
+                                    key={review._id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="bg-white p-6 rounded-xl shadow-lg hover-lift flex flex-col h-full"
+                                >
+                                    <div className="flex items-center mb-4">
+                                        <img
+                                            src={review.userPhoto || 'https://via.placeholder.com/150'}
+                                            alt={review.userName}
+                                            className="w-12 h-12 rounded-full mr-3 object-cover border-2 border-purple-100"
+                                            onError={(e) => e.target.src = 'https://via.placeholder.com/150'}
+                                        />
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 line-clamp-1">{review.userName}</h4>
+                                            <p className="text-sm text-purple-600 font-medium line-clamp-1">{review.serviceTitle}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <p className="text-gray-700 italic">"{testimonial.comment}"</p>
-                            </motion.div>
-                        ))}
+                                    <div className="flex mb-3">
+                                        {[...Array(5)].map((_, i) => (
+                                            <svg
+                                                key={i}
+                                                className={`w-5 h-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        ))}
+                                    </div>
+                                    <p className="text-gray-700 italic flex-grow">"{review.reviewText}"</p>
+                                    <div className="mt-4 text-xs text-gray-400 text-right">
+                                        {new Date(review.postedDate).toLocaleDateString()}
+                                    </div>
+                                </motion.div>
+                            ))
+                        ) : (
+                            <div className="col-span-3 text-center text-gray-500 py-8">
+                                No reviews yet. Be the first to share your experience!
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
