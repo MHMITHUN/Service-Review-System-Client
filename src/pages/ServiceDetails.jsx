@@ -24,6 +24,7 @@ const ServiceDetails = () => {
         reviewText: ''
     });
     const [showModal, setShowModal] = useState(false);
+    const [submittingReview, setSubmittingReview] = useState(false);
 
     useDocumentTitle(service ? service.title : 'Service Details');
 
