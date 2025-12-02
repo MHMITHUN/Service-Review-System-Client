@@ -3,7 +3,7 @@
 A modern, full-featured service review platform built with React, Tailwind CSS, and Firebase Authentication.
 
 ## 🌐 Live URL
-[Live Demo](https://your-netlify-url.netlify.app)
+[Live Demo](https://service-review-system-client0.netlify.app)
 
 ## 📸 Screenshots
 
@@ -90,7 +90,7 @@ ServiceReview is a comprehensive platform that allows users to discover, review,
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/MHMITHUN/Service-Review-System-Client.git
 cd client
 ```
 
